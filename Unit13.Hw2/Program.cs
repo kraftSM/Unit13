@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Ports;
+//using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,24 +13,33 @@ namespace Unit13.Hw2
 {
     internal class Program    
     {
+        static string FilePath = "R:\\Отделы\\it\\Kiselev\\SkillFactory\\cdev_Text.txt";
+
+            static string SolutionRoot;
+            static int CharCount = 0;
+            static int LetterCount = 0;
+            static int SpaceCount = 0;
+            static int TabCount = 0;
+            static int NewLineCount = 0;
+        
         static void Main(string[] args)
         {
-            const int MaxWordPrintCnt = 550; // Number of Top word printing info 
+                        
+            //const int MaxWordPrintCnt = 550; // Number of Top word printing info 
+            const int MaxWordPrintCnt = 50; // Number of Top word printing info 
             //var strList = new List<string>();
             var WordsNum = new Dictionary<string, WordInfo>();
             //var WordsNum = new SortedDictionary<string, WordInfo>();
 
-            // читаем весь файл с рабочего стола в строку текста
+            // читаем весь файл в строку текста
             string text = File.ReadAllText("D:\\iLoad\\cdev_Text.txt");
-            //string text = File.ReadAllText("C:\\Users\\Eugene\\Desktop\\Text.txt");
 
             // Сохраняем символы-разделители в массив
             char[] delimiters = new char[] { ' ', '.', '?','!', ',', ':', ';', '-', '_', '=', '+', '"', '/', '\\', '<', '>',  '(', ')','\r', '\n' }; // 
 
-            // разбиваем нашу строку текста, используя ранее ранее перечисленные символы-разделители
-            // 
+            // разбиваем нашу строку текста, используя ранее ранее перечисленные символы-разделители 
             var words = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
-            // выводим количество
+ 
             Console.WriteLine("words.Length = {0}", words.Length);
 
             var stopWatch = Stopwatch.StartNew();
@@ -48,7 +58,7 @@ namespace Unit13.Hw2
                     wrdCount.Count++;
             }
             Console.WriteLine("stopWatch.Elapsed= {0} ms", stopWatch.Elapsed.TotalMilliseconds);
-            Console.WriteLine("WordsNum.Count = {0:E}", WordsNum.Count);
+            Console.WriteLine("WordsNum.Count = {0}", WordsNum.Count);
             Console.WriteLine("Press a key..."); Console.ReadKey();
 
             //foreach (var wrd in WordsNum)
@@ -59,19 +69,27 @@ namespace Unit13.Hw2
             WordsNumList = WordsNum.Values.ToList();
 
             Console.WriteLine("WordsNumList.Count = {0}", WordsNumList.Count);
-
+            //начальный вариант Лямбды по сортирровки
+            //но список делается из Dictionary, поэтому проверке на NULL не нужна
+            //WordsNumList.Sort((WordInfo x, WordInfo y) =>
+            //    x.Count == null && y.Count == null
+            //        ? 0
+            //        : x.Count == null
+            //            ? -1
+            //            : y.Count == null
+            //                ? 1
+            //                : (x.Count > y.Count)
+            //                    ? -1
+            //                    : (x.Count < y.Count)
+            //                        ? 1
+            //                        : x.Word.CompareTo(y.Word));
             WordsNumList.Sort((WordInfo x, WordInfo y) =>
-                x.Count == null && y.Count == null
-                    ? 0
-                    : x.Count == null
+                x.Count > y.Count
                         ? -1
-                        : y.Count == null
+                        : (x.Count < y.Count)
                             ? 1
-                            : (x.Count > y.Count)
-                                ? -1
-                                : (x.Count < y.Count)
-                                    ? 1
-                                    : x.Word.CompareTo(y.Word));
+                                : x.Word.CompareTo(y.Word));
+
             //for ( int i=0; i < WordsNumList.Count;i++ )
             Console.WriteLine("WordsNumList sorted" );
             Console.WriteLine("stopWatch1.Elapsed= {0:E} ms", stopWatch1.Elapsed.TotalMilliseconds);

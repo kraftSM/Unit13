@@ -14,7 +14,8 @@ namespace Unit13
         //static string FilePath = "D:\\WinTemp\\SkillFactory\\Test file.txt";
         //static string FilePath = "C:\\Users\\Sergey.RSFGT\\Desktop\\SkillFactory\\get files from SP.txt";
         //static string FilePath = "D:\\iLoad\\cdev_Text.txt";
-        static string FilePath = "R:\\Отделы\\it\\Kiselev\\SkillFactory\\cdev_Text.txt";  
+        static string FilePath = "R:\\Отделы\\it\\Kiselev\\SkillFactory\\cdev_Text.txt";
+
 
         static string SolutionRoot;
         static int CharCount = 0;
@@ -22,6 +23,7 @@ namespace Unit13
         static int SpaceCount = 0;
         static int TabCount = 0;
         static int NewLineCount = 0;
+
         public static string GetSolutionRoot()
         {
             var dir = Path.GetDirectoryName(Directory.GetCurrentDirectory());
@@ -81,7 +83,7 @@ namespace Unit13
                     if (CharCount % 100 == 0)
                     {
                         Console.SetCursorPosition(0, Console.CursorTop);
-                        Console.Write("Обработано:{0,20}", CharCount);
+                        Console.Write("Обработано:{0,10}", CharCount);
 
                         //Console.WriteLine("CharCount: {0} ", CharCount); // 
                     }

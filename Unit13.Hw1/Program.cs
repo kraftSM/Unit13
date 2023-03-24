@@ -15,9 +15,8 @@ namespace Unit13.Hw1
         {
             var strList = new List<string>();
             var strLnkList = new LinkedList<string>();
-            // читаем весь файл с рабочего стола в строку текста
+            // читаем весь файл  в строку текста
             string text = File.ReadAllText("D:\\iLoad\\cdev_Text.txt");
-            //string text = File.ReadAllText("C:\\Users\\Eugene\\Desktop\\Text.txt");
 
             // Сохраняем символы-разделители в массив
             char[] delimiters = new char[] { ' ', '\r', '\n' };
