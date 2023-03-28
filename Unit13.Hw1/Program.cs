@@ -82,7 +82,7 @@ namespace Unit13.Hw1
                             Console.WriteLine("Exit...");
                             break;
                         default:
-                            Console.WriteLine("Введите команду \n\tNumPad0-Clear all Lists,\n\tNumPad1-List, \n\tNumPad2-LinkedList, \n\tNumPad3,Q,ESC - Выход");
+                            //Console.WriteLine("Введите команду \n\tNumPad0-Clear all Lists,\n\tNumPad1-List, \n\tNumPad2-LinkedList, \n\tNumPad3,Q,ESC - Выход");
                             Console.WriteLine("Sorry invalid command");
                             break;
                     }          
