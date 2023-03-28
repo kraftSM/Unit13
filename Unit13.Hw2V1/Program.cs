@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Unit13.Hw2V1
         static int NewLineCount = 0;
         static bool IsWord = false;
         static StringBuilder InputWord;
+        static HashSet<char> vipChars; 
 
         static void Main(string[] args)
         {
@@ -44,6 +46,8 @@ namespace Unit13.Hw2V1
             //var words = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
 
             //Console.WriteLine("words.Length = {0}", words.Length);
+            vipChars = new HashSet<char>() { '.', '?', '!', ',', ':', ';', '-', '–', '_', '=', '+', '"', '/', '\\', '<', '>', '[', ']', '(', ')', '«', '»', '\r', '\n' };//' ', 
+             //foreach(var ch in vipChars) Console.WriteLine(ch);
 
             if (File.Exists(FilePath)) // Проверим, существует ли файл по данному пути
             {
@@ -69,8 +73,8 @@ namespace Unit13.Hw2V1
                             case '\n': NewLineCount++; break; //continue;
                             default: 
                                 LetterCount++;
-
-                                InputWord.Append(inPutChar);    
+                                if (!vipChars.Contains(inPutChar)) 
+                                    InputWord.Append(inPutChar);    
                                 break; //continue;
                         }
 
@@ -81,7 +85,7 @@ namespace Unit13.Hw2V1
 
                             //Console.WriteLine("CharCount: {0} ", CharCount); // 
                         }
-                        if (System.Char.IsSeparator(inPutChar) | System.Char.IsPunctuation(inPutChar))
+                        if (System.Char.IsSeparator(inPutChar) | System.Char.IsPunctuation(inPutChar) )
                         {
                             if (InputWord.Length > 0)
                                 { 
@@ -132,6 +136,9 @@ namespace Unit13.Hw2V1
             Console.WriteLine("LetterCount: {0} ", LetterCount);
             Console.WriteLine("CharCount: {0} ", CharCount);
             Console.WriteLine("Press a key..."); Console.ReadKey();
+
+            Console.WriteLine("\nWord statistic is:");
+            Console.WriteLine("StatListNaim Idx: Word = Word count");
 
             for (int i = 0; i < MaxWordPrintCnt; i++)
             { Console.WriteLine("WordsNumList{0,4}: {1}", i, WordsNumList[i]); }
