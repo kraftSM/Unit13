@@ -29,7 +29,7 @@ namespace Unit13.Hw1
 
             while (!rqExit)
             {
-                Console.WriteLine("Press a key, together with Alt, Ctrl, or Shift.");
+                //Console.WriteLine("Press a key, together with Alt, Ctrl, or Shift.");
                 Console.WriteLine("Введите команду \n\tNumPad0-Clear all Lists,\n\tNumPad1-List, \n\tNumPad2-LinkedList, \n\tNumPad3,Q,ESC - Выход");
                 //Console.WriteLine("Press Esc to exit.");
                 ConsoleKeyInfo input = Console.ReadKey(true);
